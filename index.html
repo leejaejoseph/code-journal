@@ -21,7 +21,17 @@
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form"></div>
+    <div data-view="entry-form">
+      <h1>New Entry</h1>
+      <img src="images/placeholder-image-square.jpg" alt="form placeholder image" />
+      <h3>Title</h3>
+      <input type="text" name="title" />
+      <h3>Photo URL</h3>
+      <input type="url" name="image-url">
+      <h3>Notes</h3>
+      <textarea name="notes"></textarea>
+      <button>SAVE</button>
+    </div>
     <div data-view="entries" class="hidden"></div>
   </main>
   <script src="js/data.js"></script>
