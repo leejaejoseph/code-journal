@@ -1,0 +1,81 @@
+* {
+  font-family: "all.min", sans-serif;
+  font-weight: bold;
+}
+
+header {
+  background-color: #562c81;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  padding: 1em 0;
+  font-family: "Fira Sans", sans-serif;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+button {
+  color: white;
+  background-color: #562c81;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 1.5em 0;
+}
+
+img {
+  width: 100%;
+  height: 65vw;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    height: auto;
+  }
+}
+
+input {
+  width: 100%;
+  height: 42px;
+  margin: 0.5em 0;
+}
+
+textarea {
+  width: 100%;
+  height: 7em;
+  resize: none;
+  margin: 0.5em 0 0;
+}
+
+img,
+button,
+input,
+textarea {
+  border-radius: 5px;
+}
+
+input,
+textarea {
+  border-color: #d9d9d9;
+  border-style: solid;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #562c81;
+}
+
+h3 {
+  margin-bottom: 0;
+}
+
+.jc-right {
+  display: flex;
+  justify-content: right;
+}

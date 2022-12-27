@@ -14,23 +14,43 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
     <div class="container">
+      <div class="row">
+        <div class="column-full">
+          <a href="#home">Code Journal</a>
+        </div>
+      </div>
     </div>
   </header>
   <main class="container">
-    <div data-view="entry-form">
-      <h1>New Entry</h1>
-      <img src="images/placeholder-image-square.jpg" alt="form placeholder image" />
-      <h3>Title</h3>
-      <input type="text" name="title" />
-      <h3>Photo URL</h3>
-      <input type="url" name="image-url">
-      <h3>Notes</h3>
-      <textarea name="notes"></textarea>
-      <button>SAVE</button>
+    <div class="row">
+      <div class="column-full">
+        <h1>New Entry</h1>
+      </div>
+    </div>
+    <div class="row" data-view="entry-form">
+      <div class="column-half">
+        <img src="images/placeholder-image-square.jpg" alt="form placeholder image" />
+      </div>
+      <div class="column-half">
+        <h3>Title</h3>
+        <input type="text" name="title" />
+        <h3>Photo URL</h3>
+        <input type="url" name="image-url">
+      </div>
+      <div class="column-full">
+        <h3>Notes</h3>
+        <textarea name="notes"></textarea>
+      </div>
+      <div class="column-full jc-right">
+        <button>SAVE</button>
+      </div>
     </div>
     <div data-view="entries" class="hidden"></div>
   </main>
