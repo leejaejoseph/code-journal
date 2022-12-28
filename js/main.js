@@ -75,11 +75,11 @@ function toggleNoEntries() {
   }
 }
 
-function viewSwap(dataView) {
+function viewSwap(event) {
   var $view = document.querySelectorAll('.view');
   for (var i = 0; i < $view.length; i++) {
     var $dataView = $view[i].getAttribute('data-view');
-    if ($dataView === dataView) {
+    if ($dataView === event) {
       $view[i].className = 'view';
     } else {
       $view[i].className = 'view hidden';
@@ -88,4 +88,15 @@ function viewSwap(dataView) {
 }
 
 toggleNoEntries();
-viewSwap('entry-form');
+var $home = document.querySelector('.home');
+var $entriesAnchor = document.querySelector('.entriesAnchor');
+$home.addEventListener('click', navbarHome);
+$entriesAnchor.addEventListener('click', navbarEntries);
+
+function navbarHome() {
+  viewSwap('entry-form');
+}
+
+function navbarEntries() {
+  viewSwap('entries');
+}
