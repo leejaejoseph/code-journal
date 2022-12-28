@@ -19,43 +19,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300&display=swap" rel="stylesheet">
 </head>
 <body>
-  <form>
-    <header>
-      <div class="container">
-        <div class="row">
-          <div class="column-full">
-            <a href="#home">Code Journal</a>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main class="container">
+  <header>
+    <div class="container">
       <div class="row">
         <div class="column-full">
-          <h1>New Entry</h1>
+          <a href="#home">Code Journal</a>
         </div>
       </div>
+    </div>
+  </header>
+  <main class="container">
+    <div class="row">
+      <div class="column-full">
+        <h1>New Entry</h1>
+      </div>
+    </div>
+    <form>
       <div class="row" data-view="entry-form">
         <div class="column-half">
           <img src="images/placeholder-image-square.jpg" alt="form placeholder image" />
         </div>
         <div class="column-half">
-          <h3>Title</h3>
-          <input type="text" name="title" required/>
-          <h3>Photo URL</h3>
-          <input type="url" name="image-url" required />
+          <label for="title">Title</label>
+          <input id="title" type="text" name="title" required/>
+          <label for="imageUrl">Photo URL</label>
+          <input id="imageUrl" type="url" name="imageUrl" required />
         </div>
         <div class="column-full">
-          <h3>Notes</h3>
-          <textarea name="notes" required></textarea>
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" required></textarea>
         </div>
         <div class="column-full jc-right">
           <button type="submit">SAVE</button>
         </div>
       </div>
-      <div data-view="entries" class="hidden"></div>
-    </main>
-  </form>
+    </form>
+    <div data-view="entries" class="hidden"></div>
+  </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
