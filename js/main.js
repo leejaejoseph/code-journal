@@ -69,10 +69,23 @@ function getEntry(entry) {
   }
 }
 
-document.addEventListener('click', toggleNoEntries);
-
 function toggleNoEntries() {
   if (data.entries.length === 0) {
     document.querySelector('.hidden-entries').className = 'entries';
   }
 }
+
+function viewSwap(dataView) {
+  var $view = document.querySelectorAll('.view');
+  for (var i = 0; i < $view.length; i++) {
+    var $dataView = $view[i].getAttribute('data-view');
+    if ($dataView === dataView) {
+      $view[i].className = 'view';
+    } else {
+      $view[i].className = 'view hidden';
+    }
+  }
+}
+
+toggleNoEntries();
+viewSwap('entry-form');
