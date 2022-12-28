@@ -37,7 +37,7 @@
     <form>
       <div class="row" data-view="entry-form">
         <div class="column-half">
-          <img src="images/placeholder-image-square.jpg" alt="form placeholder image" />
+          <img id="newEntryImg" src="images/placeholder-image-square.jpg" alt="form placeholder image" />
         </div>
         <div class="column-half">
           <label for="title">Title</label>
@@ -54,8 +54,28 @@
         </div>
       </div>
     </form>
-    <div data-view="entries" class="hidden">
-      <ul></ul>
+    <div data-view="entries" class="">
+      <ul>
+        <li class="row">
+          <div class="column-half">
+            <img id="imgEntry" src="https://cdn.pixabay.com/photo/2016/02/23/17/42/orange-1218158_1280.png" alt="img" />
+          </div>
+          <div class="column-half">
+            <h2 id="h2Entry">image header</h2>
+            <p id="pEntry">falling</p>
+          </div>
+        </li>
+        <li class="row">
+          <div class="column-half">
+            <img id="gen2" src="https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Lulu_0.jpg" alt="img" />
+          </div>
+          <div class="column-half">
+            <h2>image header</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum fugiat, vitae rerum aliquid quas fugit eum</p>
+            <p>eaque sequi quibusdam ea voluptatem nam repudiandae ex nesciunt. Ratione velit dicta quasi architecto.</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </main>
   <script src="js/data.js"></script>
