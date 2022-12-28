@@ -101,3 +101,7 @@ li {
     margin: 50px 0;
   }
 }
+
+.hidden-entries {
+  display: none;
+}
