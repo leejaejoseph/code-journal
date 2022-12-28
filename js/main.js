@@ -20,5 +20,5 @@ function submission(event) {
   data.nextEntryId++;
   data.entries.unshift(formObject);
   $image.src = 'images/placeholder-image-square.jpg';
-  document.querySelector('form').reset();
+  $form.reset();
 }
