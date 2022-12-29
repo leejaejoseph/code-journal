@@ -9,6 +9,8 @@ function changeImage(event) {
 var $form = document.querySelector('form');
 $form.addEventListener('submit', submission);
 
+var $ul = document.querySelector('ul');
+
 function submission(event) {
   event.preventDefault();
   var formObject = {
@@ -21,16 +23,14 @@ function submission(event) {
   data.entries.unshift(formObject);
   $newImage.src = 'images/placeholder-image-square.jpg';
   $form.reset();
-  renderEntry(data.entries[0]);
+  $ul.prepend(renderEntry(data.entries[0]));
   toggleNoEntries();
   viewEntries();
 }
 
 function renderEntry(entry) {
-  var $ul = document.querySelector('ul');
   var $li = document.createElement('li');
   $li.setAttribute('class', 'row');
-  $ul.appendChild($li);
 
   var $divImg = document.createElement('div');
   $divImg.setAttribute('class', 'column-half');
@@ -57,16 +57,14 @@ function renderEntry(entry) {
   var pEntry = 'p' + entry.entryId;
   $p.setAttribute('id', pEntry);
   $divText.appendChild($p);
-  return $ul;
+  return $li;
 }
 
 document.addEventListener('DOMContentLoaded', getEntry);
 
 function getEntry(entry) {
   for (var i = 0; i < data.entries.length; i++) {
-    renderEntry(data.entries[i]);
-    toggleNoEntries();
-    viewEntries();
+    $ul.appendChild(renderEntry(data.entries[i]));
   }
 }
 
