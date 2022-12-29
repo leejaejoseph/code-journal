@@ -124,11 +124,16 @@ function viewEntries() {
 }
 
 function iconFunction(entry) {
-  viewEntryForm();
   var ancestorLiEntryId = entry.target.closest('li').getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === Number(ancestorLiEntryId)) {
       data.editing = data.entries[i];
     }
   }
+  document.querySelector('#title').value = data.editing.title;
+  document.querySelector('#imageUrl').value = data.editing.imageUrl;
+  changeImage();
+  document.querySelector('#notes').value = data.editing.notes;
+  document.querySelector('h1').textContent = 'Edit Entry';
+  viewEntryForm();
 }
