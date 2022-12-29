@@ -67,6 +67,8 @@ function renderEntry(entry) {
 
   var $icon = document.createElement('i');
   $icon.setAttribute('class', 'fa fa-pencil');
+  $icon.setAttribute('data-entry-id', entry.entryId);
+  $icon.addEventListener('click', iconFunction);
   $divAuto2.appendChild($icon);
 
   var $p = document.createElement('p');
@@ -119,4 +121,14 @@ function viewEntryForm() {
 
 function viewEntries() {
   viewSwap('entries');
+}
+
+function iconFunction(entry) {
+  viewEntryForm();
+  var ancestorLiEntryId = entry.target.closest('li').getAttribute('data-entry-id');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === Number(ancestorLiEntryId)) {
+      data.editing = data.entries[i];
+    }
+  }
 }
