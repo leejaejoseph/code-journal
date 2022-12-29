@@ -98,10 +98,27 @@ li {
   }
 
   li {
-    margin: 50px 0;
+    margin: 0 0 50px;
   }
 }
 
 .hidden-entries {
   display: none;
+}
+
+.entries {
+  text-align: center;
+}
+
+h1 {
+  display: inline-block;
+}
+
+.f-end {
+  display: flex;
+  justify-content: space-between;
+}
+
+.new-button {
+  height: 2.5em;
 }

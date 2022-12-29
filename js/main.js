@@ -21,6 +21,9 @@ function submission(event) {
   data.entries.unshift(formObject);
   $newImage.src = 'images/placeholder-image-square.jpg';
   $form.reset();
+  getEntry(data.entries[0]);
+  toggleNoEntries();
+  viewEntries();
 }
 
 function renderEntry(entry) {
@@ -32,12 +35,18 @@ function renderEntry(entry) {
   $entriesP.textContent = entry.notes;
 }
 
-document.addEventListener('DOMContentLoaded', getEntry);
-
-var $ul = document.querySelector('ul');
+document.addEventListener('DOMContentLoaded', getEntry('contentLoad'));
 
 function getEntry(entry) {
-  for (var i = 0; i < data.entries.length; i++) {
+  var length = 0;
+  if (entry === 'contentLoad') {
+    length = data.entries.length;
+    toggleNoEntries();
+  } else {
+    length = 1;
+  }
+  for (var i = 0; i < length; i++) {
+    var $ul = document.querySelector('ul');
     var $li = document.createElement('li');
     $li.setAttribute('class', 'row');
     $ul.appendChild($li);
@@ -71,7 +80,9 @@ function getEntry(entry) {
 
 function toggleNoEntries() {
   if (data.entries.length === 0) {
-    document.querySelector('.hidden-entries').className = 'entries';
+    document.querySelector('.entries').className = 'entries';
+  } else if (data.entries.length > 0) {
+    document.querySelector('.entries').className = 'entries hidden';
   }
 }
 
@@ -87,16 +98,15 @@ function viewSwap(event) {
   }
 }
 
-toggleNoEntries();
-var $home = document.querySelector('.home');
+var $newButton = document.querySelector('.new-button');
 var $entriesAnchor = document.querySelector('.entriesAnchor');
-$home.addEventListener('click', navbarHome);
-$entriesAnchor.addEventListener('click', navbarEntries);
+$newButton.addEventListener('click', viewEntryForm);
+$entriesAnchor.addEventListener('click', viewEntries);
 
-function navbarHome() {
+function viewEntryForm() {
   viewSwap('entry-form');
 }
 
-function navbarEntries() {
+function viewEntries() {
   viewSwap('entries');
 }
