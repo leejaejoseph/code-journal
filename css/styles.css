@@ -88,20 +88,6 @@ li {
   margin: 10px 0;
 }
 
-@media screen and (min-width: 768px) {
-  img {
-    height: 350px;
-  }
-
-  h2 {
-    margin-top: 0;
-  }
-
-  li {
-    margin: 0 0 50px;
-  }
-}
-
 .hidden-entries {
   display: none;
 }
@@ -121,4 +107,18 @@ h1 {
 
 .new-button {
   height: 2.5em;
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    height: 350px;
+  }
+
+  h2 {
+    margin-top: 0;
+  }
+
+  li {
+    margin: 0 0 50px;
+  }
 }
