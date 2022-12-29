@@ -66,6 +66,8 @@ function getEntry(entry) {
   for (var i = 0; i < data.entries.length; i++) {
     $ul.appendChild(renderEntry(data.entries[i]));
   }
+  toggleNoEntries();
+  viewEntries();
 }
 
 function toggleNoEntries() {
