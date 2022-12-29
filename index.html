@@ -23,38 +23,47 @@
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <a href="#home">Code Journal</a>
+          <a href="#home" class="home">Code Journal</a>
+          <a href="#entries" class="entriesAnchor">Entries</a>
         </div>
       </div>
     </div>
   </header>
   <main class="container">
-    <div class="row">
-      <div class="column-full">
-        <h1>New Entry</h1>
-      </div>
-    </div>
     <form>
-      <div class="row" data-view="entry-form">
-        <div class="column-half">
-          <img src="images/placeholder-image-square.jpg" alt="form placeholder image" />
-        </div>
-        <div class="column-half">
-          <label for="title">Title</label>
-          <input id="title" type="text" name="title" required/>
-          <label for="imageUrl">Photo URL</label>
-          <input id="imageUrl" type="url" name="imageUrl" required />
-        </div>
-        <div class="column-full">
-          <label for="notes">Notes</label>
-          <textarea id="notes" name="notes" required></textarea>
-        </div>
-        <div class="column-full jc-right">
-          <button type="submit">SAVE</button>
+      <div class="view" data-view="entry-form">
+        <div class="row">
+          <div class="column-full">
+            <h1>New Entry</h1>
+          </div>
+          <div class="column-half">
+            <img id="newEntryImg" src="images/placeholder-image-square.jpg" alt="form placeholder image" />
+          </div>
+          <div class="column-half">
+            <label for="title">Title</label>
+            <input id="title" type="text" name="title" required/>
+            <label for="imageUrl">Photo URL</label>
+            <input id="imageUrl" type="url" name="imageUrl" required />
+          </div>
+          <div class="column-full">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" required></textarea>
+          </div>
+          <div class="column-full jc-right">
+            <button type="submit">SAVE</button>
+          </div>
         </div>
       </div>
     </form>
-    <div data-view="entries" class="hidden"></div>
+    <div data-view="entries" class="view hidden">
+      <div class="column-full f-end">
+        <h1>Entries</h1>
+        <button class="new-button">NEW</button>
+      </div>
+      <ul>
+      </ul>
+      <p id="noEntry" class="entries">No entries have been recorded</p>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
