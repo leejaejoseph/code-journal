@@ -31,6 +31,7 @@ function submission(event) {
 function renderEntry(entry) {
   var $li = document.createElement('li');
   $li.setAttribute('class', 'row');
+  $li.setAttribute('data-entry-id', entry.entryId);
 
   var $divImg = document.createElement('div');
   $divImg.setAttribute('class', 'column-half');
@@ -46,11 +47,27 @@ function renderEntry(entry) {
   $divText.setAttribute('class', 'column-half');
   $li.appendChild($divText);
 
+  var $divRow = document.createElement('div');
+  $divRow.setAttribute('class', 'row jc-space-between ai-center');
+  $divText.appendChild($divRow);
+
+  var $divAuto1 = document.createElement('div');
+  $divAuto1.setAttribute('class', 'column-auto');
+  $divRow.appendChild($divAuto1);
+
   var $h2 = document.createElement('h2');
   $h2.textContent = entry.title;
   var h2Entry = 'h2' + entry.entryId;
   $h2.setAttribute('id', h2Entry);
-  $divText.appendChild($h2);
+  $divAuto1.appendChild($h2);
+
+  var $divAuto2 = document.createElement('div');
+  $divAuto2.setAttribute('class', 'column-auto');
+  $divRow.appendChild($divAuto2);
+
+  var $icon = document.createElement('i');
+  $icon.setAttribute('class', 'fa fa-pencil');
+  $divAuto2.appendChild($icon);
 
   var $p = document.createElement('p');
   $p.textContent = entry.notes;
