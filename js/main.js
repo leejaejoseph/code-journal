@@ -67,7 +67,7 @@ function getEntry(entry) {
     $ul.appendChild(renderEntry(data.entries[i]));
   }
   toggleNoEntries();
-  viewEntries();
+  viewSwap(data.view);
 }
 
 function toggleNoEntries() {
@@ -80,6 +80,7 @@ function toggleNoEntries() {
 
 function viewSwap(event) {
   var $view = document.querySelectorAll('.view');
+  data.view = event;
   for (var i = 0; i < $view.length; i++) {
     var $dataView = $view[i].getAttribute('data-view');
     if ($dataView === event) {
