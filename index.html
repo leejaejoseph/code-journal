@@ -1,75 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Journal</title>
-  <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300&display=swap" rel="stylesheet">
-</head>
-<body>
-  <header>
-    <div class="container">
-      <div class="row">
-        <div class="column-full">
-          <a href="#home" class="home">Code Journal</a>
-          <a href="#entries" class="entriesAnchor">Entries</a>
-        </div>
-      </div>
-    </div>
-  </header>
-  <main class="container">
-    <form>
-      <div class="view" data-view="entry-form">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Journal</title>
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;300&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="container">
         <div class="row">
           <div class="column-full">
-            <h1>New Entry</h1>
-          </div>
-          <div class="column-half">
-            <img id="newEntryImg" src="images/placeholder-image-square.jpg" alt="form placeholder image" />
-          </div>
-          <div class="column-half">
-            <label for="title">Title</label>
-            <input id="title" type="text" name="title" required/>
-            <label for="imageUrl">Photo URL</label>
-            <input id="imageUrl" type="url" name="imageUrl" required />
-          </div>
-          <div class="column-full">
-            <label for="notes">Notes</label>
-            <textarea id="notes" name="notes" required></textarea>
-          </div>
-          <div class="column-full jc-right">
-            <button type="submit">SAVE</button>
+            <a href="#home" class="home">Code Journal</a>
+            <a href="#entries" class="entriesAnchor">Entries</a>
           </div>
         </div>
       </div>
-    </form>
-    <div data-view="entries" class="view hidden">
-      <div class="row jc-space-between col-pad ai-center">
-        <div class="column-auto">
-          <h1>Entries</h1>
+    </header>
+    <main class="container">
+      <form>
+        <div class="view" data-view="entry-form">
+          <div class="row">
+            <div class="column-full">
+              <h1>New Entry</h1>
+            </div>
+            <div class="column-half">
+              <img id="newEntryImg" src="images/placeholder-image-square.jpg" alt="form placeholder image" />
+            </div>
+            <div class="column-half">
+              <label for="title">Title</label>
+              <input id="title" type="text" name="title" required />
+              <label for="imageUrl">Photo URL</label>
+              <input id="imageUrl" type="url" name="imageUrl" required />
+            </div>
+            <div class="column-full">
+              <label for="notes">Notes</label>
+              <textarea id="notes" name="notes" required></textarea>
+            </div>
+            <div class="column-full">
+              <div class="row jc-space-between">
+                <div class="column-auto">
+                  <a id="anchorDelete" class="delete-entry">Delete Entry</a>
+                </div>
+                <div class="column-auto">
+                  <button id="save" type="submit">SAVE</button>
+                </div>
+              </div>
+            </div>
+            <div class="overlay hidden">
+              <div class="modal">
+                <div class="row center">
+                  <div class="column-auto">
+                    <p class="pt-20px">Are you sure you want to delete this entry?</p>
+                  </div>
+                </div>
+                <div class="row jc-space-between">
+                  <div class="column-auto">
+                    <button id="cancelButton" class="white">Cancel</button>
+                  </div>
+                  <div class="column-auto">
+                    <button id="deleteButton" class="red">Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="column-auto">
-          <button class="new-button">NEW</button>
+      </form>
+      <div data-view="entries" class="view hidden">
+        <div class="row jc-space-between">
+          <div class="column-auto">
+            <h1>Entries</h1>
+          </div>
+          <div class="column-auto">
+            <button class="new-button">NEW</button>
+          </div>
         </div>
+        <ul>
+        </ul>
+        <p id="noEntry" class="entries">No entries have been recorded</p>
       </div>
-      <ul>
-      </ul>
-      <p id="noEntry" class="entries">No entries have been recorded</p>
-    </div>
-  </main>
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
-</body>
+    </main>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>

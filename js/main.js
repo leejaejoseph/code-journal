@@ -1,3 +1,31 @@
+document.addEventListener('DOMContentLoaded', loaded);
+function loaded() {
+  getEntry();
+  if (data.view === 'entry-form') {
+    if (data.editing === null) {
+      newForm();
+    } else {
+      editingForm();
+    }
+    viewEntryForm();
+  } else {
+    viewEntries();
+  }
+}
+
+function getEntry(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    $ul.appendChild(renderEntry(data.entries[i]));
+  }
+}
+
+function newForm() {
+  document.querySelector('h1').textContent = 'New Entry';
+  $form.reset();
+  $newImage.src = 'images/placeholder-image-square.jpg';
+  document.querySelector('.delete-entry').classList.add('hidden');
+}
+
 var $userUrl = document.querySelector('[name="imageUrl"]');
 $userUrl.addEventListener('input', changeImage);
 var $newImage = document.getElementById('newEntryImg');
@@ -6,11 +34,60 @@ function changeImage(event) {
   $newImage.src = $userUrl.value;
 }
 
+function editingForm() {
+  document.querySelector('h1').textContent = 'Edit Entry';
+  $form.elements.title.value = data.editing.title;
+  $form.elements.imageUrl.value = data.editing.imageUrl;
+  $form.elements.notes.value = data.editing.notes;
+  $newImage.src = data.editing.imageUrl;
+  document.querySelector('.delete-entry').classList.remove('hidden');
+}
+
+var $newButton = document.querySelector('.new-button');
+var $entriesAnchor = document.querySelector('.entriesAnchor');
+$newButton.addEventListener('click', newButton);
+$entriesAnchor.addEventListener('click', viewEntries);
+
+function newButton() {
+  newForm();
+  viewEntryForm();
+}
+
+function viewEntryForm() {
+  data.view = 'entry-form';
+  viewSwap('entry-form');
+}
+
+function toggleNoEntries() {
+  if (data.entries.length === 0) {
+    document.querySelector('.entries').className = 'entries';
+  } else if (data.entries.length > 0) {
+    document.querySelector('.entries').classList.add('hidden');
+  }
+}
+
+function viewSwap(event) {
+  var $view = document.querySelectorAll('.view');
+  for (var i = 0; i < $view.length; i++) {
+    var $dataView = $view[i].getAttribute('data-view');
+    if ($dataView === event) {
+      $view[i].className = 'view';
+    } else {
+      $view[i].className = 'view hidden';
+    }
+  }
+}
+
+function viewEntries() {
+  data.view = 'entries';
+  data.editing = null;
+  toggleNoEntries();
+  viewSwap('entries');
+}
+
 var $form = document.querySelector('form');
 $form.addEventListener('submit', submission);
-
 var $ul = document.querySelector('ul');
-var currentlyEditing = null;
 
 function submission(event) {
   event.preventDefault();
@@ -23,26 +100,17 @@ function submission(event) {
     formObject.entryId = data.nextEntryId;
     data.nextEntryId++;
     data.entries.unshift(formObject);
-    $newImage.src = 'images/placeholder-image-square.jpg';
-    $form.reset();
     $ul.prepend(renderEntry(data.entries[0]));
-    toggleNoEntries();
   } else {
-    formObject.entryId = data.editing.entryId;
-    data.entries[currentlyEditing].title = $form.elements.title.value;
-    data.entries[currentlyEditing].imageUrl = $form.elements.imageUrl.value;
-    data.entries[currentlyEditing].notes = $form.elements.notes.value;
     $ul.innerHTML = '';
+    formObject.entryId = data.editing.entryId;
+    editingForm();
+    data.entries[editingIndex] = formObject;
     getEntry();
-    document.querySelector('h1').textContent = 'New Entry';
-    $form.elements.title.value = '';
-    $form.elements.imageUrl.value = '';
-    $form.elements.notes.value = '';
-    $newImage.src = 'images/placeholder-image-square.jpg';
-    data.editing = null;
-    currentlyEditing = null;
   }
+  toggleNoEntries();
   viewEntries();
+  data.editing = null;
 }
 
 function renderEntry(entry) {
@@ -96,62 +164,40 @@ function renderEntry(entry) {
   return $li;
 }
 
-document.addEventListener('DOMContentLoaded', getEntry);
-
-function getEntry(entry) {
-  for (var i = 0; i < data.entries.length; i++) {
-    $ul.appendChild(renderEntry(data.entries[i]));
-  }
-  toggleNoEntries();
-  viewSwap(data.view);
-}
-
-function toggleNoEntries() {
-  if (data.entries.length === 0) {
-    document.querySelector('.entries').className = 'entries';
-  } else if (data.entries.length > 0) {
-    document.querySelector('.entries').className = 'entries hidden';
-  }
-}
-
-function viewSwap(event) {
-  var $view = document.querySelectorAll('.view');
-  data.view = event;
-  for (var i = 0; i < $view.length; i++) {
-    var $dataView = $view[i].getAttribute('data-view');
-    if ($dataView === event) {
-      $view[i].className = 'view';
-    } else {
-      $view[i].className = 'view hidden';
-    }
-  }
-}
-
-var $newButton = document.querySelector('.new-button');
-var $entriesAnchor = document.querySelector('.entriesAnchor');
-$newButton.addEventListener('click', viewEntryForm);
-$entriesAnchor.addEventListener('click', viewEntries);
-
-function viewEntryForm() {
-  viewSwap('entry-form');
-}
-
-function viewEntries() {
-  viewSwap('entries');
-}
-
+var editingIndex = null;
 function iconFunction(entry) {
   var ancestorLiEntryId = entry.target.closest('li').getAttribute('data-entry-id');
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === Number(ancestorLiEntryId)) {
       data.editing = data.entries[i];
-      currentlyEditing = i;
+      editingIndex = i;
     }
   }
-  document.querySelector('#title').value = data.editing.title;
-  document.querySelector('#imageUrl').value = data.editing.imageUrl;
-  changeImage();
-  document.querySelector('#notes').value = data.editing.notes;
-  document.querySelector('h1').textContent = 'Edit Entry';
+  editingForm();
   viewEntryForm();
+}
+
+$form.querySelector('#anchorDelete').addEventListener('click', handleModal);
+
+function handleModal(event) {
+  $form.querySelector('.overlay').classList.remove('hidden');
+}
+
+$form.querySelector('#cancelButton').addEventListener('click', handleCancel);
+
+function handleCancel(event) {
+  event.preventDefault();
+  $form.querySelector('.overlay').classList.add('hidden');
+}
+
+$form.querySelector('#deleteButton').addEventListener('click', handleDelete);
+
+function handleDelete(event) {
+  event.preventDefault();
+  data.entries.splice(editingIndex, 1);
+  $ul.innerHTML = '';
+  getEntry();
+  viewEntries();
+  data.editing = null;
+  $form.querySelector('.overlay').classList.add('hidden');
 }
